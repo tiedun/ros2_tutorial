@@ -1,0 +1,53 @@
+# ROS 2 / colcon build artifacts (at any directory level)
+build/
+install/
+log/
+
+# In-source CMake build artifacts
+CMakeFiles/
+CMakeCache.txt
+CTestTestfile.cmake
+CTestConfiguration.ini
+CTestCustom.cmake
+Makefile
+cmake_install.cmake
+compile_commands.json
+ament_cmake_core/
+ament_cmake_package_templates/
+ament_cmake_uninstall_target/
+
+# C/C++ compiler outputs
+*.o
+*.obj
+*.a
+*.so
+*.so.*
+*.out
+
+# Python caches, test outputs, and virtual environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+# ROS runtime data
+rosbag2_*/
+*.db3
+*.mcap
+
+# Editors and operating systems
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Temporary and backup files
+*.tmp
+*.temp
+*.bak
