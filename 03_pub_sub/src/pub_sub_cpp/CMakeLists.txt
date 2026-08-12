@@ -10,6 +10,28 @@ find_package(ament_cmake REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
+# 查找 ROS 2 的 rclcpp 依赖
+find_package(rclcpp REQUIRED)
+# 查找 ROS 2 的 std_msgs 依赖
+find_package(std_msgs REQUIRED)
+
+# 将 publisher.cpp 编译为可执行程序 publisher
+add_executable(publisher src/publisher.cpp)
+# 为 publisher 添加 rclcpp 和 std_msgs 依赖
+ament_target_dependencies(publisher rclcpp std_msgs)
+
+# 将 subscriber.cpp 编译为可执行程序 subscriber
+add_executable(subscriber src/subscriber.cpp)
+# 为 subscriber 添加 rclcpp 和 std_msgs 依赖
+ament_target_dependencies(subscriber rclcpp std_msgs)
+
+# 安装 publisher 和 subscriber 可执行程序
+install(TARGETS
+  publisher
+  subscriber
+
+  # 安装到 install/<功能包名>/lib/<功能包名>/ 目录
+  DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

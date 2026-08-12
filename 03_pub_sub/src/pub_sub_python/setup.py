@@ -24,6 +24,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'publisher = pub_sub_python.publisher:main',
+            'subscriber = pub_sub_python.subscriber:main'
         ],
     },
 )
