@@ -1,5 +1,6 @@
 #include <chrono>   // 时间相关功能
 #include <memory>   // 智能指针
+#include <cstddef>  // std::size_t 等基础类型定义
 #include <string>   // 字符串处理
 
 #include "rclcpp/rclcpp.hpp"
@@ -9,18 +10,17 @@
 using namespace std::chrono_literals;
 
 // 自定义发布者节点，继承 rclcpp::Node
-class MinimalPublisher : public rclcpp::Node
+class FirstPublisher : public rclcpp::Node
 {
 public:
-    // 构造函数：创建节点并初始化消息计数器
-    MinimalPublisher()
-        : Node("minimal_publisher"), count_(0)
+    FirstPublisher()
+        : Node("publisher_cpp"), count_(0)
     {
         // 创建发布者：
         // 消息类型为 std_msgs::msg::String
-        // 话题名为 topic
+        // 话题名为 cpp_topic
         // QoS 队列深度为 10
-        publisher_ = this->create_publisher<std_msgs::msg::String>("topic", 10);
+        publisher_ = this->create_publisher<std_msgs::msg::String>("cpp_topic", 10);
 
         // 定义定时器回调函数
         auto timer_callback =
@@ -55,7 +55,7 @@ private:
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
 
     // 消息计数器
-    size_t count_;
+    std::size_t count_;
 };
 
 int main(int argc, char *argv[])
@@ -63,8 +63,8 @@ int main(int argc, char *argv[])
     // 初始化 ROS 2 C++ 客户端库
     rclcpp::init(argc, argv);
 
-    // 创建 MinimalPublisher 节点并进入事件循环
-    rclcpp::spin(std::make_shared<MinimalPublisher>());
+    // 创建 FirstPublisher 节点并进入事件循环
+    rclcpp::spin(std::make_shared<FirstPublisher>());
 
     // 关闭 ROS 2 C++ 客户端库
     rclcpp::shutdown();
