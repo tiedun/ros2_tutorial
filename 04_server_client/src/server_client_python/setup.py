@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'service_client_python'
+package_name = 'server_client_python'
 
 setup(
     name=package_name,
@@ -24,8 +24,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'service=service_client_python.service:main',
-            'client=service_client_python.client:main'
+            'server=server_client_python.server:main',
+            'client=server_client_python.client:main'
         ],
     },
 )

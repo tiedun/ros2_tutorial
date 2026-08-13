@@ -13,10 +13,10 @@ class FirstClientAsync(Node):
 
         # 创建客户端：
         # 服务类型：AddTwoInts
-        # 服务名称：first_service
+        # 服务名称：python_service
         self.client = self.create_client(
             AddTwoInts,
-            'first_service'
+            'python_service'
         )
 
         # 等待服务端启动

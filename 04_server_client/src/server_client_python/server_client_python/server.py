@@ -4,18 +4,18 @@ import rclpy
 from rclpy.node import Node
 
 # 自定义服务端节点
-class FirstService(Node):
+class FirstServer(Node):
     def __init__(self):
-        # 初始化节点，节点名为 service_python
-        super().__init__('service_python')
+        # 初始化节点，节点名为 server_python
+        super().__init__('server_python')
 
         # 创建服务：
         # 服务类型：AddTwoInts
-        # 服务名称：first_service
+        # 服务名称：python_service
         # 回调函数：add_two_ints_callback
         self.service = self.create_service(
             AddTwoInts,
-            'first_service',
+            'python_service',
             self.add_two_ints_callback
         )
 
@@ -38,11 +38,11 @@ def main(args=None):
     rclpy.init(args=args)
 
     # 创建服务端节点
-    service_node = FirstService()
+    server_node = FirstServer()
 
     # 保持节点运行，等待并处理客户端请求
-    rclpy.spin(service_node)
+    rclpy.spin(server_node)
 
     # 销毁节点并关闭 ROS 2
-    service_node.destroy_node()
+    server_node.destroy_node()
     rclpy.shutdown()
