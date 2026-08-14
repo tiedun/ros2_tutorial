@@ -1,0 +1,5 @@
+int32 a # 第一个加数
+int32 b # 第二个加数
+---
+int32 sum # 本次计算结果
+int32[] history_sums # 历史计算结果
