@@ -19,6 +19,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   # 指定需要处理的自定义消息文件
   # 可以同时指定多个 .msg、.srv 和 .action 文件，用空格或换行分隔
   "msg/CustomMessage.msg"
+  "msg/CustomMessageChild.msg"
 
   # 声明上述自定义接口中使用到的其他接口包
   DEPENDENCIES
@@ -26,7 +27,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   builtin_interfaces
 )
 
-# 导出接口运行时依赖，供其他功能包使用生成后的接口
+# 向下游功能包导出 ROS 2 接口运行时依赖
 ament_export_dependencies(rosidl_default_runtime)
 
 if(BUILD_TESTING)

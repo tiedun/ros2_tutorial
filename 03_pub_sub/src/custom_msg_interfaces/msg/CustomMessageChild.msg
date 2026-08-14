@@ -1,0 +1,2 @@
+CustomMessage msg
+int64 timestamp
