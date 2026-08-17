@@ -1,0 +1,8 @@
+# 请求，斐波那契数列长度
+int32 n
+---
+# 响应，完整的斐波那契数列
+int32[] sequence
+---
+# 反馈，部分斐波那契数列
+int32[] partial_sequence
