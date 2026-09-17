@@ -30,7 +30,7 @@ class LookupTransform(Node):
 
         # 打印启动日志
         self.get_logger().info(
-            '开始查询Transform: odom -> base_link'
+            '开始查询Transform'
         )
 
     def _lookup_latest_transform(self, target, source):
