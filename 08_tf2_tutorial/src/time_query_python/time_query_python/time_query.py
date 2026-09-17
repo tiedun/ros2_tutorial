@@ -12,11 +12,14 @@ class TimeQuery(Node):
         # 初始化节点
         super().__init__('time_query_python')
 
-        # 创建Buffer和TransformListener
+        # 创建Buffer
         self.tf_buffer = Buffer(node=self)
+
+        # 创建TransformListener
         self.tf_listener = TransformListener(
             self.tf_buffer,
-            self
+            self,
+            spin_thread=False
         )
 
         # 创建定时器，按照1 Hz的频率查询Transform
@@ -43,7 +46,7 @@ class TimeQuery(Node):
             )
 
         except TransformException as ex:
-            # Transform不存在或指定时间超出Buffer缓存范围
+            # Transform查询失败时输出警告
             self.get_logger().warn(
                 f'查询{desc}Transform失败：{ex}'
             )
@@ -59,21 +62,24 @@ class TimeQuery(Node):
             '最新'
         )
 
+        # 获取当前时间
+        current_time = self.get_clock().now()
+
         # 查询当前时间3秒前的Transform
         self.query_transform(
-            self.get_clock().now() - Duration(seconds=3.0),
+            current_time - Duration(seconds=3.0),
             '3秒前'
         )
 
         # 查询当前时间3秒后的Transform
         self.query_transform(
-            self.get_clock().now() + Duration(seconds=3.0),
+            current_time + Duration(seconds=3.0),
             '3秒后'
         )
 
         # 查询当前时间20秒前的Transform
         self.query_transform(
-            self.get_clock().now() - Duration(seconds=20.0),
+            current_time - Duration(seconds=20.0),
             '20秒前'
         )
 

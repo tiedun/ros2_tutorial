@@ -21,23 +21,22 @@ public:
   PoseTransform()
   : Node("pose_transform_cpp")
   {
-    // 创建Buffer，用于保存和查询Transform
+    // 创建Buffer
     tf_buffer_ = std::make_shared<tf2_ros::Buffer>(
       this->get_clock()
     );
 
     // 创建TransformListener
-    // 接收/tf和/tf_static中的Transform，并写入Buffer
-    // false表示不创建独立的spin线程，由当前节点的Executor处理回调
-    tf_listener_ = std::make_shared<tf2_ros::TransformListener>(
-      *tf_buffer_,
-      this,
-      false
-    );
+    tf_listener_ =
+      std::make_shared<tf2_ros::TransformListener>(
+        *tf_buffer_,
+        this,
+        false
+      );
 
     // 创建定时器，每1秒尝试执行一次位姿转换
     // 转换成功后取消定时器
-    timer_ = this->create_wall_timer(
+    timer_ = this->create_timer(
       1s,
       [this]() {
         this->transform_pose();

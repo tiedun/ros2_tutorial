@@ -12,15 +12,13 @@ class LookupTransform(Node):
         super().__init__('lookup_transform_python')
 
         # 创建Buffer
-        # Buffer用于保存当前节点接收到的Transform，并提供Transform查询功能
-        self.tf_buffer = Buffer()
+        self.tf_buffer = Buffer(node=self)
 
-        # 创建TransformListener，并关联到当前节点和Buffer
-        # TransformListener接收/tf和/tf_static中的Transform，
-        # 并将其写入关联的Buffer
+        # 创建TransformListener
         self.tf_listener = TransformListener(
             self.tf_buffer,
-            self
+            self,
+            spin_thread=False
         )
 
         # 创建定时器

@@ -22,7 +22,7 @@ public:
 
     // 创建定时器
     // 每100 ms调用一次timer_callback()，即发布频率约为10 Hz
-    timer_ = this->create_wall_timer(
+    timer_ = this->create_timer(
       100ms,
       std::bind(
         &DynamicTFBroadcaster::timer_callback,

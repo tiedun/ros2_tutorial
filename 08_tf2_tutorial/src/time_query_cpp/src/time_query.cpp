@@ -1,12 +1,13 @@
 #include <chrono>
+#include <functional>
 #include <memory>
 #include <string>
 
 #include "rclcpp/rclcpp.hpp"
 #include "tf2/exceptions.hpp"
 #include "tf2/time.hpp"
-#include "tf2_ros/buffer.h"
-#include "tf2_ros/transform_listener.h"
+#include "tf2_ros/buffer.hpp"
+#include "tf2_ros/transform_listener.hpp"
 
 using namespace std::chrono_literals;
 
@@ -16,19 +17,21 @@ public:
   TimeQuery()
   : Node("time_query_cpp")
   {
-    // 创建Buffer，用于缓存和查询Transform
+    // 创建Buffer
     tf_buffer_ = std::make_shared<tf2_ros::Buffer>(
       this->get_clock()
     );
 
-    // 创建TransformListener，将接收到的Transform写入Buffer
+    // 创建TransformListener
     tf_listener_ =
       std::make_shared<tf2_ros::TransformListener>(
-        *tf_buffer_
+        *tf_buffer_,
+        this,
+        false
       );
 
     // 创建定时器，按照1 Hz的频率查询Transform
-    timer_ = this->create_wall_timer(
+    timer_ = this->create_timer(
       1s,
       std::bind(&TimeQuery::query_timer, this)
     );
@@ -81,23 +84,26 @@ private:
       "最新"
     );
 
+    // 获取当前时刻
+    const rclcpp::Time current_time = this->get_clock()->now();
+    
     // 查询当前节点时间3秒前的Transform
     query_transform(
-      this->get_clock()->now() -
+      current_time -
       rclcpp::Duration::from_seconds(3.0),
       "3秒前"
     );
 
     // 查询当前节点时间3秒后的Transform
     query_transform(
-      this->get_clock()->now() +
+      current_time +
       rclcpp::Duration::from_seconds(3.0),
       "3秒后"
     );
 
     // 查询当前节点时间20秒前的Transform
     query_transform(
-      this->get_clock()->now() -
+      current_time -
       rclcpp::Duration::from_seconds(20.0),
       "20秒前"
     );

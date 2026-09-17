@@ -10,8 +10,8 @@
 #include "tf2/exceptions.hpp"
 #include "tf2/time.hpp"
 
-#include "tf2_ros/buffer.h"
-#include "tf2_ros/transform_listener.h"
+#include "tf2_ros/buffer.hpp"
+#include "tf2_ros/transform_listener.hpp"
 
 using namespace std::chrono_literals;
 
@@ -22,22 +22,21 @@ public:
   : Node("lookup_transform_cpp")
   {
     // 创建Buffer
-    // Buffer用于保存当前节点接收到的Transform，并提供Transform查询功能
-    tf_buffer_ = std::make_unique<tf2_ros::Buffer>(
+    tf_buffer_ = std::make_shared<tf2_ros::Buffer>(
       this->get_clock()
     );
 
-    // 创建TransformListener，并关联到当前节点和Buffer
-    // TransformListener接收/tf和/tf_static中的Transform，
-    // 并将其写入关联的Buffer
-    tf_listener_ = std::make_shared<tf2_ros::TransformListener>(
-      *tf_buffer_,
-      this
-    );
+    // 创建TransformListener
+    tf_listener_ =
+      std::make_shared<tf2_ros::TransformListener>(
+        *tf_buffer_,
+        this,
+        false
+      );
 
     // 创建定时器
     // 每1s查询一次Transform，即查询频率约为1 Hz
-    timer_ = this->create_wall_timer(
+    timer_ = this->create_timer(
       1s,
       std::bind(&LookupTransform::timer_callback, this)
     );
@@ -135,7 +134,7 @@ private:
   }
 
   // Buffer
-  std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
+  std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
 
   // TransformListener
   std::shared_ptr<tf2_ros::TransformListener> tf_listener_;

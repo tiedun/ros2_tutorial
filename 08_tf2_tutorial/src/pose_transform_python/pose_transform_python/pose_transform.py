@@ -17,14 +17,14 @@ class PoseTransform(Node):
         # 初始化节点
         super().__init__('pose_transform_python')
 
-        # 创建Buffer，用于保存和查询Transform
+        # 创建Buffer
         self.tf_buffer = Buffer(node=self)
 
         # 创建TransformListener
-        # 接收/tf和/tf_static中的Transform，并写入Buffer
         self.tf_listener = TransformListener(
             self.tf_buffer,
-            self
+            self,
+            spin_thread=False
         )
 
         # 创建定时器，每1秒尝试执行一次位姿转换
