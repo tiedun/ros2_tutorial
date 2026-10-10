@@ -2,6 +2,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <functional>
 
 #include "rclcpp/rclcpp.hpp"
 #include "rcl_interfaces/msg/parameter_descriptor.hpp"
