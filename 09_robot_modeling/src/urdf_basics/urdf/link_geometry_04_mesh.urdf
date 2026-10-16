@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<robot name="link_geometry_mesh">
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://urdf_basics/meshes/demo_arrow.stl" scale="1 1 1"/>
+            </geometry>
+        </visual>
+    </link>
+</robot>
