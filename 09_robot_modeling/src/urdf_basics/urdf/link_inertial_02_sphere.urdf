@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<robot name="link_inertial_sphere">
+    <link name="base_link">
+        <!-- Visual：外观 -->
+        <visual>
+            <origin xyz="0 0 0.2"/>
+            <geometry>
+                <sphere radius="0.2"/>
+            </geometry>
+            <material name="blue">
+                <color rgba="0.15 0.55 0.90 0.5"/>
+            </material>
+        </visual>
+
+        <!-- Collision：碰撞几何 -->
+        <collision>
+            <origin xyz="0 0 0.2"/>
+            <geometry>
+                <sphere radius="0.2"/>
+            </geometry>
+        </collision>
+
+        <!-- Inertial：惯性属性 -->
+        <inertial>
+            <origin xyz="0 0 0.2"/>
+            <mass value="3.0"/>
+            <inertia
+                ixx="0.048"
+                ixy="0.0"
+                ixz="0.0"
+                iyy="0.048"
+                iyz="0.0"
+                izz="0.048"/>
+        </inertial>
+    </link>
+</robot>
