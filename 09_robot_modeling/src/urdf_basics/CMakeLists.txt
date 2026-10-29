@@ -11,9 +11,9 @@ find_package(ament_cmake REQUIRED)
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 
-# 将urdf、meshes和rviz目录及其内容安装到功能包的共享资源目录
+# 将urdf、meshes、rviz和launch目录及其内容安装到功能包的共享资源目录
 install(
-  DIRECTORY urdf meshes rviz
+  DIRECTORY urdf meshes rviz launch
   DESTINATION share/${PROJECT_NAME}
 )
 

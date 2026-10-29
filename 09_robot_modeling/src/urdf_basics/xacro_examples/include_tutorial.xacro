@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<robot name="mobile_robot"
+       xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <!-- 包含宏定义文件 -->
+    <xacro:include filename="macro/box_link.xacro"/>
+
+    <!-- 调用被包含文件中的宏 -->
+    <xacro:box_link
+        name="base_link"
+        length="0.5"
+        width="0.4"
+        height="0.2"/>
+
+    <xacro:box_joint
+        name="base_link"
+        xyz="0 0 0.1"/>
+</robot>

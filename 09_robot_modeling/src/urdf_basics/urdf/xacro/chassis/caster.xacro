@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="caster">
+        <link name="caster_link">
+            <visual>
+                <geometry>
+                    <sphere radius="${caster_radius}"/>
+                </geometry>
+                <material name="orange"/>
+            </visual>
+
+            <collision>
+                <geometry>
+                    <sphere radius="${caster_radius}"/>
+                </geometry>
+            </collision>
+
+            <xacro:sphere_inertial
+                mass="${caster_mass}"
+                radius="${caster_radius}"/>
+        </link>
+
+        <joint name="caster_joint" type="fixed">
+            <parent link="base_link"/>
+            <child link="caster_link"/>
+            <origin xyz="${caster_x} 0 ${caster_z}"/>
+        </joint>
+    </xacro:macro>
+</robot>

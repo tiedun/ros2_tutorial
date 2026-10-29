@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<robot name="property_tutorial"
+       xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- 定义Xacro属性 -->
+    <xacro:property name="length" value="0.40"/>
+    <xacro:property name="width" value="0.06"/>
+    <xacro:property name="height" value="0.06"/>
+    <xacro:property name="z"
+                    value="${height/2}"/>
+
+    <link name="base_link">
+        <visual>
+            <origin xyz="0 0 ${z}"/>
+            <geometry>
+                <box size="${length} ${width} ${height}"/>
+            </geometry>
+        </visual>
+    </link>
+</robot>

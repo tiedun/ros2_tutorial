@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- 车身及底盘 -->
+    <xacro:property name="body_length" value="0.50"/>
+    <xacro:property name="body_width" value="0.40"/>
+    <xacro:property name="body_height" value="0.20"/>
+    <xacro:property name="body_mass" value="8.0"/>
+    <xacro:property name="base_height" value="0.25"/>
+
+    <!-- 驱动轮及旋转标记 -->
+    <xacro:property name="wheel_radius" value="0.12"/>
+    <xacro:property name="wheel_width" value="0.06"/>
+    <xacro:property name="wheel_mass" value="0.8"/>
+    <xacro:property name="wheel_x" value="0.08"/>
+    <xacro:property name="wheel_y"
+                    value="${body_width/2 + wheel_width/2}"/>
+    <xacro:property name="wheel_z"
+                    value="${wheel_radius - base_height}"/>
+
+    <xacro:property name="wheel_mark_x" value="0.07"/>
+    <xacro:property name="wheel_mark_y" value="0.032"/>
+    <xacro:property name="wheel_mark_length" value="0.05"/>
+    <xacro:property name="wheel_mark_width" value="0.005"/>
+    <xacro:property name="wheel_mark_height" value="0.012"/>
+
+    <!-- 后部辅助支撑轮 -->
+    <xacro:property name="caster_radius" value="0.08"/>
+    <xacro:property name="caster_mass" value="0.2"/>
+    <xacro:property name="caster_x" value="-0.20"/>
+    <xacro:property name="caster_z"
+                    value="${caster_radius - base_height}"/>
+
+    <!-- LiDAR -->
+    <xacro:property name="lidar_radius" value="0.05"/>
+    <xacro:property name="lidar_length" value="0.06"/>
+    <xacro:property name="lidar_mass" value="0.35"/>
+    <xacro:property name="lidar_z"
+                    value="${body_height/2 + lidar_length/2}"/>
+
+    <!-- Camera -->
+    <xacro:property name="camera_length" value="0.04"/>
+    <xacro:property name="camera_width" value="0.08"/>
+    <xacro:property name="camera_height" value="0.06"/>
+    <xacro:property name="camera_mass" value="0.15"/>
+    <xacro:property name="camera_x"
+                    value="${body_length/2 + camera_length/2}"/>
+
+    <!-- IMU -->
+    <xacro:property name="imu_length" value="0.04"/>
+    <xacro:property name="imu_width" value="0.03"/>
+    <xacro:property name="imu_height" value="0.01"/>
+    <xacro:property name="imu_mass" value="0.02"/>
+    <xacro:property name="imu_x" value="-0.05"/>
+
+</robot>

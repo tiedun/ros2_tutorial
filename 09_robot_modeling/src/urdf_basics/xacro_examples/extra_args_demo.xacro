@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<robot name="extra_args_demo"
+       xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:arg name="show_imu_visual" default="true"/>
+    <link name="imu_link">
+        <xacro:if value="$(arg show_imu_visual)">
+            <visual>
+                <geometry>
+                    <box size="0.05 0.03 0.02"/>
+                </geometry>
+            </visual>
+        </xacro:if>
+    </link>
+</robot>

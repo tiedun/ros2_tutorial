@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<robot name="macro_basic"
+       xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- 定义宏 -->
+    <xacro:macro name="box_link" params="name length width height:=0.5">
+        <link name="${name}">
+            <visual>
+                <geometry>
+                    <box size="${length} ${width} ${height}"/>
+                </geometry>
+            </visual>
+        </link>
+    </xacro:macro>
+
+    <!-- 调用宏 -->
+    <xacro:box_link
+        name="demo_link"
+        length="0.5"
+        width="0.4"
+        height="0.2"/>
+
+    <!-- 调用宏 -->
+    <xacro:box_link
+        name="demo_link_default_height"
+        length="0.5"
+        width="0.4"/>
+</robot>

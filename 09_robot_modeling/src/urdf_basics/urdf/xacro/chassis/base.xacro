@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="robot_base">
+        <!-- 虚拟地面参考坐标系 -->
+        <link name="base_footprint"/>
+
+        <!-- 车身 -->
+        <link name="base_link">
+            <visual>
+                <geometry>
+                    <box size="${body_length} ${body_width} ${body_height}"/>
+                </geometry>
+                <material name="blue"/>
+            </visual>
+
+            <collision>
+                <geometry>
+                    <box size="${body_length} ${body_width} ${body_height}"/>
+                </geometry>
+            </collision>
+
+            <xacro:box_inertial
+                mass="${body_mass}"
+                x="${body_length}"
+                y="${body_width}"
+                z="${body_height}"/>
+        </link>
+
+        <joint name="base_footprint_joint" type="fixed">
+            <parent link="base_footprint"/>
+            <child link="base_link"/>
+            <origin xyz="0 0 ${base_height}"/>
+        </joint>
+    </xacro:macro>
+</robot>
