@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- 传感器安装宏 -->
+    <xacro:macro name="sensor_mount" params="name *origin">
+        <joint name="${name}_joint" type="fixed">
+            <parent link="base_link"/>
+            <child link="${name}_link"/>
+            <xacro:insert_block name="origin"/>
+        </joint>
+    </xacro:macro>
+
+    <!-- 传感器模块 -->
+    <xacro:macro name="robot_sensors" params="show_imu_visual">
+        <!-- LiDAR -->
+        <link name="lidar_link">
+            <visual>
+                <geometry>
+                    <cylinder
+                        radius="${lidar_radius}"
+                        length="${lidar_length}"/>
+                </geometry>
+                <material name="gray"/>
+            </visual>
+
+            <collision>
+                <geometry>
+                    <cylinder
+                        radius="${lidar_radius}"
+                        length="${lidar_length}"/>
+                </geometry>
+            </collision>
+
+            <xacro:cylinder_z_inertial
+                mass="${lidar_mass}"
+                radius="${lidar_radius}"
+                length="${lidar_length}"/>
+        </link>
+
+        <xacro:sensor_mount name="lidar">
+            <origin xyz="0 0 ${lidar_z}"/>
+        </xacro:sensor_mount>
+
+        <!-- Camera -->
+        <link name="camera_link">
+            <visual>
+                <geometry>
+                    <box
+                        size="${camera_length} ${camera_width} ${camera_height}"/>
+                </geometry>
+                <material name="gray"/>
+            </visual>
+
+            <collision>
+                <geometry>
+                    <box
+                        size="${camera_length} ${camera_width} ${camera_height}"/>
+                </geometry>
+            </collision>
+
+            <xacro:box_inertial
+                mass="${camera_mass}"
+                x="${camera_length}"
+                y="${camera_width}"
+                z="${camera_height}"/>
+        </link>
+
+        <xacro:sensor_mount name="camera">
+            <origin xyz="${camera_x} 0 0"/>
+        </xacro:sensor_mount>
+
+        <!-- IMU -->
+        <link name="imu_link">
+            <xacro:if value="${show_imu_visual}">
+                <visual>
+                    <geometry>
+                        <box
+                            size="${imu_length} ${imu_width} ${imu_height}"/>
+                    </geometry>
+                    <material name="gray"/>
+                </visual>
+            </xacro:if>
+
+            <xacro:box_inertial
+                mass="${imu_mass}"
+                x="${imu_length}"
+                y="${imu_width}"
+                z="${imu_height}"/>
+        </link>
+
+        <xacro:sensor_mount name="imu">
+            <origin xyz="${imu_x} 0 0"/>
+        </xacro:sensor_mount>
+    </xacro:macro>
+</robot>

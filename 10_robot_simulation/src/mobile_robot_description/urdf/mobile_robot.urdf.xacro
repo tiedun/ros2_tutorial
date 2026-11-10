@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<robot name="mobile_robot_complete"
+       xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- 声明外部参数 -->
+    <xacro:arg name="show_imu_visual" default="true"/>
+
+    <!-- 公共定义 -->
+    <xacro:include filename="xacro/common/properties.xacro"/>
+    <xacro:include filename="xacro/common/materials.xacro"/>
+    <xacro:include filename="xacro/common/inertials.xacro"/>
+
+    <!-- 部件模块 -->
+    <xacro:include filename="xacro/chassis/base.xacro"/>
+    <xacro:include filename="xacro/chassis/wheel.xacro"/>
+    <xacro:include filename="xacro/chassis/caster.xacro"/>
+    <xacro:include filename="xacro/sensors/sensors.xacro"/>
+
+    <!-- 装配机器人 -->
+    <xacro:robot_base/>
+
+    <xacro:drive_wheel side="left" sign="1"/>
+    <xacro:drive_wheel side="right" sign="-1"/>
+
+    <xacro:caster/>
+
+    <xacro:robot_sensors
+        show_imu_visual="$(arg show_imu_visual)"/>
+
+</robot>
