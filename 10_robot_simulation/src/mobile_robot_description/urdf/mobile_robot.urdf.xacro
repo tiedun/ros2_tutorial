@@ -16,6 +16,9 @@
     <xacro:include filename="xacro/chassis/caster.xacro"/>
     <xacro:include filename="xacro/sensors/sensors.xacro"/>
 
+    <!-- 仿真配置 -->
+    <xacro:include filename="xacro/gazebo/gazebo.xacro"/>
+
     <!-- 装配机器人 -->
     <xacro:robot_base/>
 

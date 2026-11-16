@@ -45,6 +45,14 @@
             <radius>0.050000000000000003</radius>
           </cylinder>
         </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
       </collision>
       <visual name='base_footprint_fixed_joint_lump__base_link_visual'>
         <pose>0 0 0.25 0 0 0</pose>
@@ -107,6 +115,28 @@
           <ambient>0.75000006 0.825000048 0.900000036 1</ambient>
         </material>
       </visual>
+      <sensor name='lidar_sensor' type='gpu_lidar'>
+        <always_on>true</always_on>
+        <update_rate>10</update_rate>
+        <topic>/scan</topic>
+        <lidar>
+          <scan>
+            <horizontal>
+              <samples>721</samples>
+              <resolution>1</resolution>
+              <min_angle>-3.1415926535900001</min_angle>
+              <max_angle>3.1415926535900001</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.12</min>
+            <max>10</max>
+            <resolution>0.01</resolution>
+          </range>
+        </lidar>
+        <pose>0 0 0.38 0 0 0</pose>
+        <gz_frame_id>lidar_link</gz_frame_id>
+      </sensor>
     </link>
     <joint name='left_wheel_joint' type='revolute'>
       <pose relative_to='base_footprint'>0.080000000000000002 0.23000000000000001 0.12 0 0 0</pose>
